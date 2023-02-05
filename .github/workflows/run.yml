@@ -26,9 +26,6 @@ jobs:
       env:
         TOOT_TOKEN_KEY: ${{ secrets.TOOT_TOKEN_KEY }}
         TOOT_API_BASE: ${{ secrets.TOOT_API_BASE }}
-        # TWITTER_CONSUMER_SECRET: ${{ secrets.TWITTER_CONSUMER_SECRET }}
-        # TWITTER_TOKEN_KEY: ${{ secrets.TWITTER_TOKEN_KEY }}
-        # TWITTER_TOKEN_SECRET: ${{ secrets.TWITTER_TOKEN_SECRET }}
       run: |
         python3 toot_events.py -g ${{ secrets.WORKING_GROUP }} -f LAST_SEEN -m > $GITHUB_STEP_SUMMARY
     - name: Push update
