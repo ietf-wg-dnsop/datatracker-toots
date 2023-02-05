@@ -12,7 +12,8 @@ try:
 except ImportError:
     mastodon = None
 
-TOOT_API_BASE = "https://hachyderm.io/"
+# Added this to the Org's secret list
+#TOOT_API_BASE = "https://hachyderm.io/"
 
 
 
@@ -115,7 +116,7 @@ class DatatrackerTracker:
         try:
             self.toot_api = mastodon.Mastodon(
                                     access_token=os.environ["TOOT_TOKEN_KEY"],
-                                    api_base_url=TOOT_API_BASE,
+                                    api_base_url=os.environ["TOOT_API_BASE"],
                                     ratelimit_method='wait')
         except mastodon.MastodonError as why:
             print(why)
