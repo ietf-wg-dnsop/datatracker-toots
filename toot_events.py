@@ -30,7 +30,8 @@ class DatatrackerTracker:
         "sent_last_call": "IETF Last Call for {title} has started. {link}",
         "started_iesg_process": "{title} has entered evalutation by the IESG. {link}",
         "changed_state": {
-            "IETF WG state changed to <b>In WG Last Call</b> from WG Document": "{title} is now in Working Group Last Call. {link}"
+            "IETF WG state changed to <b>In WG Last Call</b> from WG Document": "{title} is now in Working Group Last Call. {link}",
+            "IETF WG state changed to <b>Adopted by a WG</b> from Call For Adoption By WG Issued": "{title} has been adopted bt the Working Group {link}"
         },
     }
 
