@@ -65,12 +65,12 @@ class DatatrackerTracker:
                 message = self.format_message(event, template)
             except ValueError:
                 break
-            self.note(f"Message: {message}")
+            self.note(f"Message: #hachybots {message}")
             if self.args.markdown:
-                print(f"* {message}")
+                print(f"* #hachybots {message}")
             if not self.args.dry_run:
                 try:
-                    self.toot(message)
+                    self.toot(f"#hachybots {message}")
                 except mastodon.MastodonError:
                     last_seen_id = event["id"] - 1
                     break  # didn't tweet so we should bail
