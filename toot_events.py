@@ -34,10 +34,6 @@ class DatatrackerTracker:
         },
     }
 
-    # If you desire
-    # TOOT_HASH = "#hachybots"
-    TOOT_HASH = os.environ["TOOT_HASH"]
-
     def __init__(self, argv=None):
         self.args = self.parse_args(argv)
         self.toot_api = None
@@ -69,12 +65,12 @@ class DatatrackerTracker:
                 message = self.format_message(event, template)
             except ValueError:
                 break
-            self.note(f"Message: #hachybots {message}")
+            self.note(f"Message: {self.args.hashtag} {message}")
             if self.args.markdown:
-                print(f"* #hachybots {message}")
+                print(f"* {self.args.hashtag} {message}")
             if not self.args.dry_run:
                 try:
-                    self.toot(f"#hachybots {message}")
+                    self.toot(f"{self.args.hashtag} {message}")
                 except mastodon.MastodonError:
                     last_seen_id = event["id"] - 1
                     break  # didn't tweet so we should bail
@@ -181,6 +177,13 @@ class DatatrackerTracker:
             "--file",
             dest="last_seen_file",
             help="file to read last seen ID from and write it back to after processing",
+        )
+        parser.add_argument(
+            "-h",
+            "--hashtag",
+            dest="hashtag",
+            default="",
+            help="optional hash tag to apply to posts",
         )
         return parser.parse_args(argv)
 
