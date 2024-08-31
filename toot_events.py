@@ -35,7 +35,7 @@ class DatatrackerTracker:
     }
 
     # If you desire
-    TOOT_HASH = os.environ["TOOT_HASH"]
+    TOOT_HASH = "#hachybots"
 
     def __init__(self, argv=None):
         self.args = self.parse_args(argv)
