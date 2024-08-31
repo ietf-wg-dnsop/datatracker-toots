@@ -12,9 +12,8 @@ try:
 except ImportError:
     mastodon = None
 
-# Added this to the Org's secret list
+# This should be added to the Org's secret list
 #TOOT_API_BASE = "https://hachyderm.io/"
-
 
 class DatatrackerTracker:
     API_BASE = "https://datatracker.ietf.org"

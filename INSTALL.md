@@ -8,9 +8,9 @@ This service isn't provided in a central repo because we don't want to have your
 
 ## 2. Create a Mastadon Application
 
-Assume you have a Mastadon on a server, and BASE_API is said server.
+Assume you have a Mastadon on a server, and TOOT_API_BASE is said server.
 
-1. Go to BASE_API/settings/applications/new
+1. Go to TOOT_API_BASE/settings/applications/new
 
 You will be given three items:
 
@@ -26,7 +26,7 @@ These reside under https://github.com/ietf-wg-<wgname>/datatracker-toots/setting
 
 Click on `New Repository Secret` and add the following:
 
-* `WORKING_GROUP` - the short identifier for the WG, e.g., `httpbis`, `tls`. Should be lowercase.
+* `WORKING_GROUP` - the short identifier for the WG, e.g., `httpbis`, `tls`, `dnsop`. Should be lowercase.
 * `TOOT_API_BASE` - the Mastodon instance connected to
 * `TOOT_TOKEN_KEY` - the Access Secret
 * `TOOT_HASH` - an optional hashtag to add to all posts
