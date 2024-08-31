@@ -37,6 +37,7 @@ class DatatrackerTracker:
     def __init__(self, argv=None):
         self.args = self.parse_args(argv)
         self.toot_api = None
+        self.toot_hash = os.environ.get('MY_HOME', " ")
 
     def run(self):
         last_seen_id = self.get_last_seen()
@@ -65,12 +66,12 @@ class DatatrackerTracker:
                 message = self.format_message(event, template)
             except ValueError:
                 break
-            self.note(f"Message: {self.args.hashtag} {message}")
+            self.note(f"Message: {self.toot_hash} {message}")
             if self.args.markdown:
-                print(f"* {self.args.hashtag} {message}")
+                print(f"* {self.toot_hash} {message}")
             if not self.args.dry_run:
                 try:
-                    self.toot(f"{self.args.hashtag} {message}")
+                    self.toot(f"{self.toot_hash} {message}")
                 except mastodon.MastodonError:
                     last_seen_id = event["id"] - 1
                     break  # didn't tweet so we should bail
@@ -177,13 +178,6 @@ class DatatrackerTracker:
             "--file",
             dest="last_seen_file",
             help="file to read last seen ID from and write it back to after processing",
-        )
-        parser.add_argument(
-            "-t",
-            "--hashtag",
-            dest="hashtag",
-            default=" ",
-            help="optional hash tag to apply to posts",
         )
         return parser.parse_args(argv)
 
