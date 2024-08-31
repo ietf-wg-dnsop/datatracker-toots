@@ -27,7 +27,7 @@ jobs:
         TOOT_TOKEN_KEY: ${{ secrets.TOOT_TOKEN_KEY }}
         TOOT_API_BASE: ${{ secrets.TOOT_API_BASE }}
       run: |
-        python3 toot_events.py -g ${{ secrets.WORKING_GROUP }} -h ${{ secrets.TOOT_HASH }} -f LAST_SEEN -m > $GITHUB_STEP_SUMMARY
+        python3 toot_events.py -g ${{ secrets.WORKING_GROUP }} -t ${{ secrets.TOOT_HASH }} -f LAST_SEEN -m > $GITHUB_STEP_SUMMARY
     - name: Push update
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

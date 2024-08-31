@@ -179,7 +179,7 @@ class DatatrackerTracker:
             help="file to read last seen ID from and write it back to after processing",
         )
         parser.add_argument(
-            "-h",
+            "-t",
             "--hashtag",
             dest="hashtag",
             default="",
