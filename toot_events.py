@@ -16,7 +16,6 @@ except ImportError:
 #TOOT_API_BASE = "https://hachyderm.io/"
 
 
-
 class DatatrackerTracker:
     API_BASE = "https://datatracker.ietf.org"
     CHUNK_SIZE = 250
