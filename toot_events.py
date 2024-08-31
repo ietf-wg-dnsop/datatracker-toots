@@ -182,7 +182,7 @@ class DatatrackerTracker:
             "-t",
             "--hashtag",
             dest="hashtag",
-            default="",
+            default=" ",
             help="optional hash tag to apply to posts",
         )
         return parser.parse_args(argv)
