@@ -20,7 +20,7 @@ except ImportError:
 class DatatrackerTracker:
     API_BASE = "https://datatracker.ietf.org"
     CHUNK_SIZE = 250
-    REQ_LIMIT = 10
+    REQ_LIMIT = 20
     RETRY_MAX = 2
     RETRY_DELAY = 30
     INTERESTING_EVENTS = {
@@ -33,6 +33,9 @@ class DatatrackerTracker:
             "IETF WG state changed to <b>In WG Last Call</b> from WG Document": "{title} is now in Working Group Last Call. {link}"
         },
     }
+
+    # If you desire
+    TOOT_HASH = os.environ["TOOT_HASH"]
 
     def __init__(self, argv=None):
         self.args = self.parse_args(argv)
@@ -65,12 +68,12 @@ class DatatrackerTracker:
                 message = self.format_message(event, template)
             except ValueError:
                 break
-            self.note(f"Message: #hachybots {message}")
+            self.note(f"Message: {self.TOOT_HASH} {message}")
             if self.args.markdown:
-                print(f"* #hachybots {message}")
+                print(f"* {self.TOOT_HASH} {message}")
             if not self.args.dry_run:
                 try:
-                    self.toot(f"#hachybots {message}")
+                    self.toot(f"{self.TOOT_HASH} {message}")
                 except mastodon.MastodonError:
                     last_seen_id = event["id"] - 1
                     break  # didn't tweet so we should bail
@@ -98,6 +101,8 @@ class DatatrackerTracker:
             more_events = results["objects"]
             more_events.reverse()
             events[:0] = more_events
+        if req >= self.REQ_LIMIT:
+            self.warn(f"Max requests reached: {req}")
         new_events = [event for event in events if event["id"] > last_seen_id]
         if len(new_events) == len(events) and last_seen_id is not None:
             self.warn(f"Event ID {last_seen_id} not found.")

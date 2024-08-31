@@ -22,10 +22,11 @@ jobs:
       run: |
         python -m pip install --upgrade pip
         pip install -r requirements.txt
-    - name: Run toott_events.py
+    - name: Run toot_events.py
       env:
         TOOT_TOKEN_KEY: ${{ secrets.TOOT_TOKEN_KEY }}
         TOOT_API_BASE: ${{ secrets.TOOT_API_BASE }}
+        TOOT_HASH: ${{ vars.TOOT_HASH }}
       run: |
         python3 toot_events.py -g ${{ secrets.WORKING_GROUP }} -f LAST_SEEN -m > $GITHUB_STEP_SUMMARY
     - name: Push update
