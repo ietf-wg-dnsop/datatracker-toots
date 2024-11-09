@@ -28,7 +28,10 @@ class DatatrackerTracker:
         "sent_last_call": "IETF Last Call for {title} has started. {link}",
         "started_iesg_process": "{title} has entered evalutation by the IESG. {link}",
         "changed_state": {
-            "IETF WG state changed to <b>In WG Last Call</b> from WG Document": "{title} is now in Working Group Last Call. {link}"
+            "IETF WG state changed to <b>In WG Last Call</b> from WG Document": "{title} is now in Working Group Last Call. {link}",
+            "IETF WG state changed to <b>Adopted by a WG</b> from Call For Adoption By WG Issued": "{title} has now been adopted by the Working Group. {link}",
+            "IETF WG state changed to <b>Call For Adoption By WG Issued": "A Call for Adoption for {title} is now underway. {link}",
+            "IETF WG state changed to <b>Call For Adoption By WG Issued</b> from Candidate for WG Adoption": "A Call for Adoption for {title} is now underway. {link}"
         },
     }
 
@@ -51,7 +54,9 @@ class DatatrackerTracker:
         num = 0
         for event in events:
             last_seen_id = event["id"]
-            if not f"draft-ietf-{self.args.wg}" in event["doc"]:
+            # if not f"draft-ietf-{self.args.wg}" in event["doc"]:
+            # If search for -wg- one can pick up relevant adoption calls
+            if not f"-{self.args.wg}-" in event["doc"]:
                 continue
             if self.args.debug:
                 self.note(f"Event: {event['type']} ({event['desc']})")
