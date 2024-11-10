@@ -40,6 +40,7 @@ class DatatrackerTracker:
     def __init__(self, argv=None):
         self.args = self.parse_args(argv)
         self.toot_api = None
+        self.note(f"{os.environ.get('TOOT_HASHBOTS')}")
         # self.toot_hash = os.environ.get('MY_HOME', " ")
 
     def run(self):
