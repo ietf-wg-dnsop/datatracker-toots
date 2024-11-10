@@ -35,10 +35,12 @@ class DatatrackerTracker:
         },
     }
 
+    TOOT_HASH = "#hachybots"
+
     def __init__(self, argv=None):
         self.args = self.parse_args(argv)
         self.toot_api = None
-        self.toot_hash = os.environ.get('MY_HOME', " ")
+        # self.toot_hash = os.environ.get('MY_HOME', " ")
 
     def run(self):
         last_seen_id = self.get_last_seen()
@@ -69,12 +71,12 @@ class DatatrackerTracker:
                 message = self.format_message(event, template)
             except ValueError:
                 break
-            self.note(f"Message: {self.toot_hash} {message}")
+            self.note(f"Message: {self.TOOT_HASH} {message}")
             if self.args.markdown:
-                print(f"* {self.toot_hash} {message}")
+                print(f"* {self.TOOT_HASH} {message}")
             if not self.args.dry_run:
                 try:
-                    self.toot(f"{self.toot_hash} {message}")
+                    self.toot(f"{self.TOOT_HASH} {message}")
                 except mastodon.MastodonError:
                     last_seen_id = event["id"] - 1
                     break  # didn't tweet so we should bail
