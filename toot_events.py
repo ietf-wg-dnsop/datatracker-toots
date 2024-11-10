@@ -57,9 +57,9 @@ class DatatrackerTracker:
         num = 0
         for event in events:
             last_seen_id = event["id"]
-            # if not f"draft-ietf-{self.args.wg}" in event["doc"]:
             # If search for -wg- one can pick up relevant adoption calls
-            if not f"-{self.args.wg}-" in event["doc"]:
+            # if not f"-{self.args.wg}-" in event["doc"]:
+            if not f"draft-ietf-{self.args.wg}" in event["doc"]:
                 continue
             if self.args.debug:
                 self.note(f"Event: {event['type']} ({event['desc']})")
